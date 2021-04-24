@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+<meta charset="UTF-8">
+<div class="user">
+    <br>
+    <h2 align="center">Доска объявлений</h2>
+    {% for product in products %}
+    <br>
+    <br>
+
+    <div class="prod">
+        <br>
+        <div class="row" align="center">
+            <div class="col">
+                <a href="/product/{{ product.id }}">
+                    <img class="prod" align="center" src="{{ url_for('static', filename=product.img) }}"
+                         alt="здесь должна была быть картинка, но не нашлась" height="200" width="200"></a>
+            </div>
+            <div class="col">
+                <table class="my">
+                    <tr class="my_row">
+                        <td class="title" height="100" align="center"><strong>Название</strong></td>
+                        <td class="title" height="100" align="center"><strong>Продавец</strong></td>
+                        <td class="title" height="100" align="center"><strong>Цена</strong></td>
+
+                    </tr>
+                    <tr class="my_row">
+                        {% set a = "/user/" %}
+                        <td class="ordinary" height="100" align="center">{{ product.product.capitalize() }}</td>
+                        <td class="ordinary" height="100" align="center"><a class="navbar-brand"
+                                                                            href="{{ a }}{{ product.leader }}">{{
+                            names[product.leader][0] }} {{ names[product.leader][1] }}</a></td>
+                        <td class="ordinary" height="100" align="center">{{ product.price }} руб.</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col">
+                <table class="my">
+                    <tr>
+                        <td class="title" height="100" align="center"><strong>Товар продан?</strong></td>
+                    </tr>
+                    <tr>
+                        {% if product.is_finished %}
+                        <td class="ordinaryes" height="100" align="center">Да</td>
+                        {% else %}
+                        <td class="ordinary" height="100" align="center">Нет</td>
+                        {% endif %}
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br>
+    </div>
+
+    <br>
+    {% endfor %}
+    <br>
+</div>
+{% endblock %}
